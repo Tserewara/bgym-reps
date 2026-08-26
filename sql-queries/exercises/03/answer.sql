@@ -1,0 +1,1 @@
+-- Albums per artist, including the artists with none.

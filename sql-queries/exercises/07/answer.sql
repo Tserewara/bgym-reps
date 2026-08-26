@@ -1,0 +1,1 @@
+-- 1. Find the track. 2. EXPLAIN ANALYZE it. 3. Add an index. 4. Explain again.

@@ -1,0 +1,21 @@
+# One container, seeded on first start. `bgym reset` takes the volume with it,
+# which is what makes a second attempt the same exercise as the first.
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: gym
+      POSTGRES_PASSWORD: gym
+      POSTGRES_DB: gym
+    volumes:
+      - ./seed:/docker-entrypoint-initdb.d:ro
+    ports:
+      # Bound so you can point psql, DBeaver or your editor at it directly.
+      # 55432 rather than 5432: a laptop that already runs Postgres should not
+      # have to stop it to do an exercise.
+      - "55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym -d gym"]
+      interval: 2s
+      timeout: 3s
+      retries: 20

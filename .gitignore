@@ -1,0 +1,4 @@
+# Nothing here is a working directory: `bgym` clones this read-only and
+# scaffolds the answer files somewhere else entirely.
+*.pyc
+__pycache__/
