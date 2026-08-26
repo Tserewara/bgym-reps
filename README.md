@@ -15,3 +15,4 @@ belongs in here.
 | Rep set | Subject | Reps |
 |---|---|---|
 | `sql-queries` | sql | 7 |
+| `csharp-reading` | csharp | 7 |

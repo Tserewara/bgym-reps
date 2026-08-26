@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Warnings stay warnings. Several reps depend on code that compiles and
+         misbehaves, which is the whole point of reading it. -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AssemblyName>rep</AssemblyName>
+    <RootNamespace>Rep</RootNamespace>
+  </PropertyGroup>
+</Project>

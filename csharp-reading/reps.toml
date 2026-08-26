@@ -1,0 +1,15 @@
+[rep_set]
+slug = "csharp-reading"
+
+[env]
+requires = ["docker"]
+# The SDK image is the environment. Nothing is installed on the host, which is
+# the whole point for somebody who does not want .NET on their laptop.
+up    = "docker compose up -d --wait"
+reset = "docker compose down -v && docker compose up -d --wait"
+down  = "docker compose down -v"
+
+[run]
+# One project per rep, restored once by the compose healthcheck. `--nologo` so
+# the output is the program's, not the toolchain's.
+cmd = "docker compose exec -T sdk dotnet run --nologo --project /work/reps/{n}"

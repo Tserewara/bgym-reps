@@ -1,0 +1,21 @@
+# A long-running SDK container rather than `docker run` per rep: a cold
+# `dotnet` first-run costs about thirty seconds, and paying that on every rep
+# would make the reps feel like the toolchain rather than like the language.
+services:
+  sdk:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /work
+    volumes:
+      - .:/work
+      - nuget:/root/.nuget/packages
+    # Kept alive so `exec` is instant. The warm-up runs once, in the
+    # healthcheck, so `bgym start` does not return until the toolchain is ready.
+    command: ["sleep", "infinity"]
+    healthcheck:
+      test: ["CMD-SHELL", "dotnet --version >/dev/null 2>&1"]
+      interval: 3s
+      timeout: 30s
+      retries: 20
+
+volumes:
+  nuget:
