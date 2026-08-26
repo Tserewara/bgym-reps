@@ -1,4 +1,4 @@
-[trilha]
+[rep_set]
 slug = "sql-queries"
 
 [env]
@@ -11,4 +11,4 @@ down  = "docker compose down -v"
 # `-v ON_ERROR_STOP=1` so a syntax error is an error and not a silent skip to
 # the next statement, and `-f -` so the file comes from the working directory
 # rather than from inside the container — the answers are yours and live there.
-cmd = "docker compose exec -T db psql -q -v ON_ERROR_STOP=1 -U gym -d gym -f - < exercises/{n}/answer.sql"
+cmd = "docker compose exec -T db psql -q -v ON_ERROR_STOP=1 -U gym -d gym -f - < reps/{n}/answer.sql"

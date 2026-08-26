@@ -19,5 +19,5 @@ and compare the two plans' costs.
 Write in a comment: at roughly what table size would the planner change its
 mind on its own, and what would you have to know to answer that properly?
 
-This one is the point of the trilha. A query plan is the thing you will be
+This one is the point of this set. A query plan is the thing you will be
 handed by an assistant and asked to approve.

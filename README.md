@@ -1,6 +1,6 @@
-# bgym-trilhas
+# bgym-reps
 
-Runnable content for BackendGym trilhas. One directory per trilha; the bench
+Runnable content for BackendGym rep sets. One directory per rep set; the bench
 stores the catalogue and your progress, and everything that executes lives
 here (`backendgym/docs/DECISIONS.md` §34).
 
@@ -12,6 +12,6 @@ Read-only from the learner's side: `bgym` clones this into a cache and
 scaffolds the answer files into a working directory of yours. Nothing you write
 belongs in here.
 
-| Trilha | Subject | From |
+| Rep set | Subject | Reps |
 |---|---|---|
-| `sql-queries` | sql | CS50 SQL, lectures 1–3 |
+| `sql-queries` | sql | 7 |
