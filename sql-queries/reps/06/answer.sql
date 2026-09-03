@@ -1,1 +1,0 @@
--- Years in which more than one artist released an album.
