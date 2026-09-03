@@ -1,0 +1,1 @@
+-- Write the paired EXPLAIN ANALYZE inserts here.
