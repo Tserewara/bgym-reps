@@ -1,0 +1,5 @@
+# Catalogue metadata the bench reads when publishing this set.
+stack = ["postgresql"]
+level = "warmup"
+blurb = "Read a schema you did not write and get the rows out of it: filters, joins, subqueries, sets and aggregates, with the NULLs and orphans that bite."
+position = 1
