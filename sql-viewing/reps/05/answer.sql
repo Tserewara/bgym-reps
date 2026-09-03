@@ -1,0 +1,1 @@
+-- Write the partitioning view, trigger, delete, and checks here.
