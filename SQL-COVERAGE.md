@@ -1,0 +1,567 @@
+# CS50 SQL coverage ledger
+
+This ledger maps every line of `sql/cs50-sql-summary.md` to a rep, a set README doorway, or an explicit exclusion. Rep numbers are local to their set.
+
+## Introdução
+
+- Objetivos do curso: all five set doorways, with the read-and-judge objective in each README.
+- Bancos de dados e a linguagem SQL: `sql-querying` README and reps 01-09.
+- Operações de criar, consultar, atualizar e excluir dados: `sql-querying` reps 01, 04-09; `sql-designing-and-writing` reps 01, 04-09.
+- Modelagem de entidades e relacionamentos: `sql-querying` reps 05-09; `sql-designing-and-writing` README.
+- Views, índices e otimização: `sql-viewing` reps 01-06 and `sql-optimizing` reps 01-08.
+- Evolução de SQLite para MySQL e PostgreSQL: Postgres 16 is the chosen environment, stated in every README; SQLite/MySQL command-specific material is listed as out below.
+- Aplicações e conjuntos de dados usados durante o curso: each planned case study is named in its set README and seed.
+
+## 1. Querying: consultando dados
+
+- Fundamentos dos dados: `sql-querying` README doorway.
+- Dados na sociedade da informação: doorway; context only, no executable trap.
+- Tabelas, linhas, colunas e atributos: reps 01, 04 and 08.
+- Representação de entidades do mundo real: seed schema and README.
+- Diferença entre planilhas e bancos de dados: doorway; context only.
+- Escala, frequência de atualizações e velocidade de busca: `sql-optimizing` README and reps 01-02.
+- Bancos de dados e DBMS: all compose files and `sql-querying` README.
+- O que é um banco de dados: every README doorway.
+- O que é um sistema gerenciador de banco de dados: every README doorway.
+- SQLite, MySQL, PostgreSQL, Oracle, Access e MongoDB: PostgreSQL is covered; the named alternatives are out because the plan pins Postgres 16 and local disposable stacks cannot exercise their distinct behavior.
+- Software proprietário versus código aberto: out; no rep trap in the planned Postgres scope.
+- Sistemas leves versus sistemas mais completos: README doorway and `sql-optimizing`/`sql-scaling-and-security` environment comparisons.
+- Operações CRUD: `sql-querying` reps 01-09 and `sql-designing-and-writing` reps 04-09.
+- Introdução ao SQL: `sql-querying` reps 01-04.
+- Structured Query Language: `sql-querying` README doorway.
+- Consultas como perguntas feitas aos dados: every statement is a concrete query task.
+- Palavras-chave, expressões e cláusulas: reps 01, 04, 07 and 08.
+- Convenções de capitalização, aspas e ponto e vírgula: all SQL statements and rep 03's readable query.
+- Ambiente SQLite: out; the repository contract is Postgres 16, not a host `.db` file.
+- Arquivos `.db`: out for the same Postgres-only reason.
+- Abertura de bancos com `sqlite3`: out; `docker compose exec ... psql` is the disposable equivalent.
+- Uso do terminal e do prompt do SQLite: out; CLI shell behavior is not the planned trap.
+- Comandos auxiliares como `.quit`: out; commands are run through `bgym` and `psql`.
+- Seleção de dados: rep 01.
+- `SELECT`: reps 01-09.
+- `FROM`: reps 01-09.
+- Seleção de todas as colunas com `*`: reps 04 and 09.
+- Seleção de uma ou várias colunas: reps 01, 04 and 09.
+- Resultados de consultas como novas tabelas: reps 04 and 08.
+- Limitação de resultados: rep 01.
+- `LIMIT`: rep 01; no result is allowed to hide the planted `NULL`.
+- Recuperação das primeiras N linhas: rep 01.
+- Uso de limites durante exploração de grandes tabelas: rep 01's bounded exploration, with large-table follow-up in `sql-optimizing` rep 01.
+- Filtragem: reps 01-02.
+- `WHERE`: reps 01-02, 05-09.
+- Igualdade e desigualdade: reps 01, 05 and 08.
+- Maior que, menor que, maior ou igual e menor ou igual: reps 01, 04 and 08.
+- Combinação de condições com `AND` e `OR`: reps 01, 04 and `sql-designing-and-writing` rep 06.
+- Negação com `NOT`: doorway and rep 02's `IS NOT NULL` alternative; the specific keyword has no separate trap.
+- Precedência e agrupamento com parênteses: `sql-designing-and-writing` rep 06's judge query and `sql-scaling-and-security` rep 03's injection output.
+- Valores ausentes: reps 01, 02 and 04.
+- Significado de `NULL`: reps 01, 02 and 04.
+- Diferença entre zero, texto vazio e valor desconhecido: reps 02 and 04 print `NULL` beside numeric zero.
+- `IS NULL`: rep 02 and rep 04's unrated rows.
+- `IS NOT NULL`: rep 02's alternative and rep 07's translated set.
+- Comportamento de `NULL` em comparações e contagens: rep 04.
+- Busca por padrões: rep 01.
+- `LIKE`: reps 01, 03 and 09.
+- Wildcard `%` para zero ou mais caracteres: reps 01 and 09.
+- Wildcard `_` para um único caractere: doorway; no distinct failure mode in the planned nine-rep set.
+- Correspondência parcial de textos: `sql-optimizing` rep 03's judge and `sql-scaling-and-security` rep 04.
+- Intervalos: rep 01.
+- `BETWEEN ... AND`: rep 01.
+- Intervalos numéricos e temporais: rep 01's year interval and `sql-designing-and-writing` rep 01's timestamp data.
+- Reformulação com operadores de comparação: doorway; same range is visible in optimizer rep 04.
+- Ordenação: reps 01, 02, 04, 05, 06 and 09.
+- `ORDER BY`: reps 01-09 where output is ordered.
+- Ordem crescente com `ASC`: reps 02 and 09's explicit default ordering; syntax is available in the doorway.
+- Ordem decrescente com `DESC`: reps 01, 04 and 08.
+- Ordenação por uma ou mais colunas: reps 01, 02, 06 and 09.
+- Combinação entre ordenação e `LIMIT`: rep 01.
+- Funções de agregação: reps 04, 06 and 08.
+- `AVG`: reps 04 and 08.
+- `COUNT`: reps 03, 04, 06 and 08.
+- `MIN`: out; no planted string-minimum trap survives the five-set scope.
+- `MAX`: out; no planted maximum trap survives the five-set scope.
+- `SUM`: `sql-designing-and-writing` rep 03 and `sql-querying` rep 04's count/NULL comparison.
+- `COUNT(*)` versus contagem de uma coluna: reps 03, 04 and 06.
+- Efeito dos valores nulos sobre agregações: rep 04.
+- Transformação e apresentação de resultados: reps 04 and 08.
+- Arredondamento com `ROUND`: reps 04 and 08.
+- Composição de funções: reps 04 and 08.
+- Apelidos de colunas com `AS`: reps 03, 04, 06 and 08.
+- Nomes legíveis para resultados calculados: reps 03, 04, 06 and 08.
+- Valores distintos: reps 03, 06 and 07.
+- `DISTINCT`: rep 03's duplicate publisher judge and rep 06's distinct book count.
+- Remoção de duplicatas: rep 07's set operations and rep 03's named defect.
+- `COUNT(DISTINCT coluna)`: reps 03 and 06.
+
+## 2. Relating: relacionando tabelas
+
+- Da tabela única ao banco relacional: `sql-querying` README and rep 05.
+- Separação de livros, autores, editoras, tradutores e avaliações: set 1 schema and reps 03-08.
+- Entidades e relacionamentos: set 1 schema doorway.
+- Cardinalidades: schema relationships and README doorway.
+- Um para um: doorway; no one-to-one trap is needed for the planned Booker schema.
+- Um para muitos: publisher/book and author/book joins in reps 03, 06 and 09.
+- Muitos para muitos: `book_authors` and rep 06.
+- Participação obrigatória e opcional: orphan author/book and full join reps 06 and 09.
+- Diagramas entidade-relacionamento: doorway; the schema names the same entities and keys.
+- Notação “pé de galinha”: out; notation has no runnable SQL failure mode in this scope.
+- Chaves: reps 03, 05, 06 and 09.
+- Chave primária: all seed schemas and rep 03.
+- Chave estrangeira: reps 05, 06 and 09.
+- Identificadores numéricos: all seed schemas.
+- Referência entre registros de tabelas distintas: reps 05, 06 and 09.
+- Tabelas associativas: rep 06 and `book_authors` seed.
+- Join tables ou junction tables: rep 06.
+- Modelagem de relações muitos-para-muitos: rep 06.
+- Relacionamento entre livros e autores: reps 05, 06 and 08.
+- Subconsultas: rep 05 and rep 08's aggregate query.
+- Consulta dentro de outra consulta: rep 05.
+- Ordem de avaliação: reps 05 and 08.
+- Subconsultas que retornam um valor: rep 08's rating aggregate and later update reps.
+- Subconsultas que retornam conjuntos de valores: rep 05's `IN` query.
+- Operador `IN`: rep 05.
+- Verificação de pertencimento: rep 05.
+- Uso de resultados de subconsultas em filtros: rep 05.
+- Junções: reps 03, 04, 06 and 09.
+- `JOIN ... ON`: reps 03, 04, 06 and 09.
+- Associação de chaves primárias e estrangeiras: reps 03, 06 and 09.
+- Nomes qualificados no formato `tabela.coluna`: reps 03, 04, 06 and 09.
+- Resolução de nomes de colunas ambíguos: reps 04, 06 and 09.
+- Tipos de join: reps 03, 06 and 09.
+- `INNER JOIN`: reps 03 and 06 judge defects.
+- `LEFT JOIN`: reps 04 and 06.
+- `RIGHT JOIN`: rep 09's full-join comparison in the statement doorway; a separate right-only trap is out because full preservation is the needed failure.
+- `FULL JOIN`: rep 09.
+- Registros correspondentes e não correspondentes: reps 06 and 09.
+- `NATURAL JOIN`: rep 09 judge.
+- Junção automática por nomes de colunas: rep 09 judge.
+- Conveniência e riscos de depender de nomes implícitos: rep 09 judge.
+- Operações de conjuntos: rep 07.
+- `INTERSECT`: rep 07.
+- `UNION`: rep 07.
+- `EXCEPT`: rep 07.
+- Interseção, combinação e diferença entre resultados: rep 07.
+- Agrupamento: reps 03, 04, 06 and 08.
+- `GROUP BY`: reps 03, 04, 06 and 08.
+- Agregações por grupo: reps 03, 04, 06 and 08.
+- Médias e contagens por livro: reps 04 and 08.
+- `HAVING` para filtrar grupos: rep 08.
+- Diferença entre `WHERE` e `HAVING`: rep 08's task constraint.
+- Combinação de agrupamento, agregação, ordenação e joins: reps 04, 06 and 08.
+
+## 3. Designing: projetando bancos
+
+- Conceito de schema: `sql-designing-and-writing` reps 01-02 and README.
+- Inspeção com `.schema`: out; SQLite meta-command, replaced by Postgres catalog inspection in rep 02.
+- Transformação de requisitos do mundo real em tabelas e colunas: rep 01 and MBTA README.
+- Estudo de caso do transporte de Boston: set 2 seed and README.
+- Passageiros, estações e visitas: set 2 schema uses riders, stations and swipes.
+- CharlieCards e registros de passagem: set 2 seed and reps 03-05.
+- Tarifas, saldos, entradas, saídas e depósitos: set 2 `fare`, `balance`, `entered_at`, `exited_at`; deposits are out because no separate trap remains.
+- Normalização: set 2 README and rep 01's staging requirements.
+- Identificação de redundâncias: rep 01's normalized staging shape.
+- Divisão de uma tabela em várias entidades: set 2 schema.
+- Primeira, segunda e terceira formas normais como heurísticas: set 2 doorway; normalization is used, not lectured.
+- Manutenção de atributos na entidade correta: set 2 schema and rep 02.
+- Benefícios para consistência, manutenção e consultas: reps 03, 05, 06 and 08.
+- Criação de tabelas: rep 01.
+- `CREATE TABLE`: rep 01 temporary staging table.
+- Definição de nomes e colunas: rep 01.
+- Arquivos `schema.sql`: `seed/01-schema.sql` in set 2 and every set.
+- Aplicação e recriação de schemas: every compose init plus `bgym reset` doorway.
+- `CREATE TABLE IF NOT EXISTS`: out; reset makes idempotence unnecessary and the missing-object trap is not part of the plan.
+- Tipagem no SQLite: SQLite storage-class details are out; Postgres type choices are reps 01-02 and set 5 rep 02.
+- Diferença entre storage class e type affinity: out; SQLite-only behavior.
+- Storage classes `NULL`, `INTEGER`, `REAL`, `TEXT` e `BLOB`: out as SQLite-specific; Postgres `NULL`, integer, numeric and text are covered elsewhere.
+- Inteiros de diferentes tamanhos: set 5 rep 02's identity/catalog query and all Postgres schemas.
+- Números de ponto flutuante e imprecisão: set 5 rep 02 contrasts numeric with floating point.
+- BLOBs como objetos binários: out; no binary-data trap in the case studies.
+- Affinities `TEXT`, `NUMERIC`, `INTEGER`, `REAL` e `BLOB`: out as SQLite-specific.
+- Conversão automática entre representações: out as SQLite-specific.
+- Escolha de representações para dinheiro, booleanos, datas e horários: set 2 schema and set 5 rep 02.
+- Chaves e constraints de tabela: set 2 schema and reps 02, 05 and 06.
+- Chaves primárias simples: all schemas.
+- Chaves primárias compostas: set 1 `book_authors` primary key.
+- `rowid` implícito do SQLite: out; Postgres identity columns are used instead.
+- Chaves estrangeiras: set 2 reps 05 and 08.
+- Múltiplas chaves estrangeiras: set 2 `swipes`.
+- Integridade dos relacionamentos: rep 05.
+- Constraints de coluna: reps 01, 02, 05 and 06.
+- `NOT NULL`: rep 01 and catalog output in rep 02.
+- `UNIQUE`: set 2 schema and rep 04.
+- `CHECK`: rep 01's fare requirement and set 2 schema.
+- `DEFAULT`: rep 01 source column and rep 02 catalog output.
+- Expressões de validação: rep 01 and rep 05.
+- Valores padrão como `CURRENT_TIMESTAMP`: set 2 trigger/audit schema and rep 08.
+- Redundâncias entre algumas constraints e chaves: doorway and rep 02's catalog reading.
+- Remoção e evolução do schema: reps 04-09.
+- `DROP TABLE`: out; destructive schema deletion is not needed for the disposable reset.
+- `ALTER TABLE`: rep 01 adds the source column.
+- Renomear tabelas: out; no useful failure mode in the planned MBTA fixture.
+- Adicionar colunas: rep 01.
+- Renomear colunas: out; no separate trap.
+- Remover colunas: out; no separate trap.
+- Evolução de `visits` para um modelo de `cards` e `swipes`: set 2 README and schema.
+- Portabilidade de schemas entre SQLite, MySQL e PostgreSQL: Postgres is the target; SQLite/MySQL syntax differences are deliberately out to keep all five stacks disposable and consistent.
+
+## 4. Writing: escrevendo e modificando dados
+
+- Inserção: set 2 rep 04 and set 5 rep 05.
+- `INSERT INTO`: reps 04, 05 and 08.
+- `VALUES`: reps 04 and 08.
+- Especificação das colunas de destino: reps 04 and 05.
+- Correspondência entre colunas e valores: rep 04.
+- Inserção de uma ou várias linhas: reps 04 and set 5 rep 05.
+- Valores nulos, padrões e IDs automáticos: reps 01, 02, 04 and 08.
+- Importação em massa: set 2 rep 04.
+- Estrutura de arquivos CSV: rep 04's inline CSV load.
+- Cabeçalhos e valores separados por vírgulas: rep 04.
+- Comando `.import`: out; SQLite meta-command, replaced by PostgreSQL `COPY`.
+- Opções de CSV e omissão do cabeçalho: rep 04's `COPY ... FORMAT csv` doorway.
+- Compatibilidade entre o CSV e o schema: rep 04.
+- Tabelas temporárias de staging: reps 01 and 04.
+- `INSERT INTO ... SELECT ...`: rep 04.
+- Transformação dos dados durante a importação: rep 04 trims station names.
+- Limitações da conversão de campos vazios em `NULL`: out; the trap is represented by explicit nullable timestamp/translator fields instead.
+- Exclusão: reps 05 and 09.
+- `DELETE FROM`: reps 05 and set 3 rep 05.
+- Exclusão de uma ou várias linhas: rep 05.
+- Uso obrigatório e cuidadoso de `WHERE`: reps 05, 06 and 09.
+- Risco de apagar uma tabela inteira: rep 09 judge's widened update; a physical `DELETE` is discussed in its doorway.
+- Exclusão por datas, valores nulos e outras condições: reps 05, 06 and 09 use conditions; date/null variants are doorway examples.
+- Integridade referencial durante exclusões: rep 05.
+- Registros referenciados por chaves estrangeiras: rep 05.
+- Violações de constraints: rep 05 statement predicts the restricted delete.
+- Remoção manual dos registros dependentes: rep 05.
+- Ações `ON DELETE`: set 2 schema and rep 05.
+- `RESTRICT`: rep 05.
+- `NO ACTION`: out; Postgres default is not a separate planted failure here.
+- `SET NULL`: out; the card/station relationships are required and use RESTRICT.
+- `CASCADE`: out; the rep's point is to preserve dependents until deliberately removed.
+- IDs depois de exclusões: set 5 rep 02 identity metadata; no SQLite AUTOINCREMENT behavior.
+- Comportamento de chaves geradas: set 2 rep 02 and set 5 rep 02.
+- Uso de `AUTOINCREMENT`: out; SQLite-specific spelling, replaced by Postgres identity.
+- Atualizações: reps 06-09.
+- `UPDATE`: reps 06-09.
+- `SET`: reps 06-09.
+- Atualização de uma ou várias colunas: reps 07-08.
+- Restrição das linhas com `WHERE`: reps 06-09.
+- Subconsultas em valores e condições: rep 08 and set 5 rep 02.
+- Correção de relacionamentos entre registros: reps 05 and 06.
+- Limpeza e padronização de dados: rep 07.
+- Remoção de espaços com `TRIM`: rep 07.
+- Conversão com `UPPER` e `LOWER`: doorway in rep 07; the planted trap needs `TRIM`, so a case conversion is not forced into the answer.
+- Correção de capitalização: doorway in rep 07.
+- Correção de erros ortográficos: out; the fixture has whitespace, not a fabricated spelling exercise.
+- Atualizações por padrão com `LIKE`: rep 07.
+- Validação dos resultados com `GROUP BY` e contagens: reps 03, 06 and 07.
+- Funções escalares do SQLite: out; `TRIM` is exercised in Postgres.
+- Triggers: rep 08.
+- Automação em resposta a `INSERT`, `UPDATE` e `DELETE`: schema trigger and set 3 INSTEAD OF DELETE rep 05.
+- `CREATE TRIGGER`: rep 05 and set 2 seeded trigger.
+- Triggers `BEFORE` e `AFTER`: seeded `AFTER` trigger; `BEFORE` is out because the OLD/NEW audit trap needs AFTER semantics.
+- Execução `FOR EACH ROW`: seed trigger.
+- Blocos `BEGIN ... END`: seed PL/pgSQL trigger and set 3 rep 05.
+- Uma ou várias instruções dentro do trigger: seed trigger and rep 05.
+- Referências `OLD` e `NEW`: rep 08.
+- Registro automático de compras e vendas em uma tabela de transações: set 2 status events and set 4 seat sales use the same audit/transaction shape; the exact art-sale case is out.
+- Deleção lógica: reps 08-09 and set 3 reps 01, 03, 05 and 06.
+- Soft delete versus exclusão física: reps 08-09 and set 3 rep 05.
+- Coluna indicadora `deleted`: set 2 schema and rep 09.
+- Recuperação e auditoria de registros: rep 08.
+- Filtragem dos itens ativos: rep 09 and set 3 reps 01-05.
+- Privacidade, GDPR e direito ao esquecimento: set 3 and set 5 view-only privacy reps; GDPR itself is doorway context, not a legal exercise.
+
+## 5. Viewing: criando visões dos dados
+
+- Conceito de view: reps 01 and 03.
+- Tabela virtual definida por uma consulta: rep 01.
+- Reutilização de consultas complexas: reps 02 and 04.
+- Reexecução sobre os dados atuais: rep 01 statement.
+- Pouco ou nenhum armazenamento adicional: README doorway.
+- Finalidades das views: reps 01, 02, 05 and 06.
+- Simplificar: reps 01-02.
+- Agregar: rep 02.
+- Particionar: rep 05.
+- Proteger dados: rep 06.
+- Criação e consulta: reps 01-02.
+- `CREATE VIEW ... AS`: reps 01-03.
+- Views baseadas em joins: rep 01.
+- Consultar uma view como se fosse uma tabela: reps 01-05.
+- Filtrar e ordenar seus resultados: reps 01, 02 and 04.
+- Presença das views no schema: rep 04's `pg_views` query.
+- `DROP VIEW`: out; reset handles disposable objects and no separate drop trap is needed.
+- Simplificação de relacionamentos: rep 01.
+- Ocultação de joins e subconsultas complexas: reps 01-02.
+- Visões contendo autores e livros lado a lado: analogous collection/artist view in rep 01; the exact Booker view is set 1's schema doorway.
+- Interfaces de consulta mais simples para usuários e aplicações: reps 01-02 and set 5 rep 01.
+- Views agregadas: rep 02 and judge rep 03.
+- Média de avaliações por livro: set 1 rep 04.
+- `GROUP BY`, `AVG` e `ROUND`: set 1 rep 04.
+- Inclusão de títulos por meio de joins: set 1 rep 04.
+- Atualização automática do resultado quando os dados-base mudam: rep 01 statement.
+- Views construídas sobre outras views: rep 02.
+- Views temporárias: rep 04.
+- `CREATE TEMPORARY VIEW`: rep 04.
+- Duração limitada à conexão atual: rep 04 catalog comparison.
+- Uso para análise e experimentação: rep 04.
+- Common Table Expressions: rep 04.
+- CTEs com `WITH`: rep 04.
+- Visões válidas durante uma única consulta: rep 04.
+- Uma ou várias CTEs: rep 04.
+- Reutilização de subconsultas sem persistir objetos no schema: rep 04.
+- Comparação entre view permanente, view temporária e CTE: rep 04.
+- Particionamento lógico: rep 05.
+- Views para subconjuntos de uma tabela: rep 05.
+- Partições de livros por ano: rep 05's date partition, using the MFA collection case.
+- Escolha de nomes descritivos: reps 01, 02 and 05.
+- Uso por aplicações que precisam apenas de parte dos dados: reps 05-06 and set 5 rep 01.
+- Modificação de views: rep 05.
+- Por que uma view comum não armazena os registros: rep 05's trigger task.
+- Erros ao tentar usar `UPDATE` diretamente: rep 05 requires the INSTEAD OF path.
+- Atualização das tabelas subjacentes: rep 05.
+- Segurança e privacidade: rep 06 and set 5 rep 01.
+- Princípio do menor privilégio: rep 06 and set 5 rep 01.
+- Ocultação de colunas: rep 06 and set 5 rep 01.
+- Informações pessoalmente identificáveis: set 3 private note and set 5 rider name/email.
+- Views anonimizadas para análise: set 3 `collection_analysis` and set 5 `ride_public`.
+- Limitação do SQLite: ausência de controles de acesso por usuário: out with the SQLite environment; Postgres role access is exercised instead.
+- Soft delete por views: rep 05.
+- View `current_collections`: reps 01-05.
+- Exposição somente dos registros ativos: reps 01-03.
+- Triggers `INSTEAD OF`: rep 05.
+- Converter um `DELETE` na view em `UPDATE` na tabela-base: rep 05.
+- Inserção pela view: out; the deletion path is the planted failure and insertion would add no useful second trap.
+- Reativação de um registro anteriormente excluído: out; no rep slot remains after the required soft-delete path.
+- Diferenciação entre reativar e criar um novo registro: out for the same scope reason.
+
+## 6. Optimizing: desempenho e concorrência
+
+- Dimensões da otimização: set 4 README and reps 01-08.
+- Tempo de execução: reps 01, 02 and 05.
+- Espaço de armazenamento: rep 06's vacuum task and rep 04's partial index.
+- Concorrência: reps 07-08.
+- Medição de consultas: reps 01-02.
+- `.timer on`: out; SQLite shell command, replaced by `EXPLAIN ANALYZE` timings.
+- Comparação de tempos antes e depois de otimizações: reps 01-02.
+- Varredura e pesquisa: reps 01-02.
+- Busca linear: rep 01 sequential scan.
+- Table scan: rep 01.
+- Diferença entre `SCAN` e `SEARCH`: Postgres plan vocabulary in reps 01-02; SQLite labels are out.
+- Índices: reps 01-05.
+- `CREATE INDEX`: reps 02 and 04.
+- Índices sobre uma coluna: rep 02.
+- `DROP INDEX`: out; no safe second attempt needs to remove the title index.
+- Índices implícitos de chaves: schema and rep 04 plan reading.
+- Aceleração de filtros e joins: reps 02 and 04.
+- Planos de consulta: reps 01-04.
+- `EXPLAIN QUERY PLAN`: out; SQLite command, replaced by Postgres `EXPLAIN`.
+- Leitura das decisões do otimizador: reps 01-04.
+- Identificação de scans e pesquisas por índice: reps 01-02.
+- Planejamento de consultas envolvendo várias tabelas: set 1 reps 04, 06 and 08; optimizer fixture itself uses one large table.
+- Índices avançados: rep 04.
+- Índices compostos sobre várias colunas: rep 04.
+- Ordem das colunas no índice: rep 04.
+- Covering indexes: rep 04.
+- Obtenção do resultado diretamente pelo índice: rep 04's Index Only Scan prediction.
+- Estrutura dos índices: rep 04 README doorway; internal B-tree node drawings are out.
+- B-trees ou árvores balanceadas: rep 04 doorway.
+- Raiz, nós, filhos e folhas: out; diagram vocabulary has no separate runnable trap.
+- Ponteiros entre nós e registros: out for the same reason.
+- Busca eficiente em dados ordenados: reps 02 and 04.
+- Relação com busca binária: rep 04 doorway; detailed algorithm comparison is out.
+- Custos dos índices: reps 04-05.
+- Mais velocidade de leitura: rep 02.
+- Consumo adicional de disco: rep 04 partial-index task.
+- Custo de manter o índice em inserções, atualizações e exclusões: rep 05.
+- Índices parciais: rep 04.
+- Indexação apenas de um subconjunto: rep 04.
+- Condições `WHERE` na criação do índice: rep 04.
+- Redução do espaço usado: rep 04 doorway.
+- Necessidade de a consulta ser compatível com a condição do índice: rep 04.
+- Recuperação de espaço: rep 06.
+- Espaço não liberado imediatamente após exclusões: rep 06 maintenance task.
+- `VACUUM` no SQLite: out; PostgreSQL `VACUUM (ANALYZE)` is used in rep 06.
+- Compactação do arquivo: rep 06 doorway; Postgres storage behavior is not measured as a file diff.
+- Comando equivalente `OPTIMIZE` em outros DBMSs: out; no second DBMS is in the pinned stack.
+- Impacto da operação sobre disponibilidade e tempo: rep 06 statement and README.
+- Concorrência: reps 07-08.
+- Múltiplas consultas e conexões simultâneas: rep 08 two-session script.
+- Transferências bancárias como unidade indivisível: rep 07 wallet transfer.
+- Transações: reps 07-08.
+- `BEGIN TRANSACTION`: rep 07 and race answer.
+- `COMMIT`: rep 07.
+- `ROLLBACK`: reps 07 and 08.
+- Visibilidade de alterações entre conexões: rep 08.
+- Desfazer operações após erros: rep 07.
+- Propriedades ACID: reps 07-08; each property is a prediction about the transfer/race result.
+- Atomicidade: rep 07.
+- Consistência: reps 07-08.
+- Isolamento: rep 08.
+- Durabilidade: rep 07 commit.
+- Race conditions: rep 08.
+- Verificação e atualização concorrentes de saldo: rep 08's seat check/update.
+- Problemas de check-then-act: rep 08.
+- Serialização de operações críticas: rep 08's `FOR UPDATE` fix.
+- Locks: rep 08.
+- Banco desbloqueado: rep 08 baseline.
+- Shared locks para leitura: out; PostgreSQL's row-lock trap uses `FOR UPDATE`, not a SQLite lock tutorial.
+- Exclusive locks para escrita: rep 08 consequence of row locking; explicit SQLite exclusive mode is out.
+- Granularidade de bloqueios: rep 08 statement and `FOR UPDATE` fix.
+- Priorização por ordem de chegada ou timestamp: out; no deterministic queue-order claim is made.
+- `BEGIN EXCLUSIVE TRANSACTION`: out; SQLite-specific command.
+- Trade-off entre consistência e paralelismo: rep 08's blocked second session versus lost update.
+
+## 7. Scaling: bancos em produção e grande escala
+
+- Escalabilidade: set 5 README and compose topology.
+- Capacidade de absorver aumentos e picos de requisições: set 5 README doorway.
+- Crescimento de usuários, dados, leituras e escritas: set 5 reps 05-06.
+- SQLite como banco embutido: out; production topology is Postgres services.
+- MySQL e PostgreSQL como servidores de banco de dados: Postgres primary/replica in set 5; MySQL-specific behavior is out.
+- Uso de hardware dedicado, memória e recursos distribuídos: set 5 README; no cloud/hardware project is in scope.
+- Arquitetura cliente-servidor: set 5 app, primary, replica and shard compose services.
+- Conexão remota: app container connects by service hostname.
+- Usuário, senha, host e porta: compose environment and rep 01.
+- Servidor contendo vários bancos: two shard databases in compose.
+- Usuário administrativo: `gym` seed user and rep 01 role distinction.
+- Metadados e bancos internos do servidor: out; no production catalog tour is needed.
+- Operação básica do MySQL: out; the plan requires Postgres 16.
+- `CREATE DATABASE`: out; compose creates databases.
+- `SHOW DATABASES`: out; no MySQL client in the stack.
+- `USE`: out; each `psql` command names its database.
+- `SHOW TABLES`: out; Postgres `\dt` is a doorway command only.
+- `DESCRIBE`: out; Postgres catalog query is set 2 rep 02.
+- Identificadores delimitados por backticks: out; Postgres uses double quotes where needed.
+- Migração do schema do SQLite: set 2 and set 5 schemas use Postgres equivalents; SQLite migration syntax is out.
+- Inteiros no MySQL: out; the planned type rep uses Postgres integer/bigint/identity.
+- `TINYINT`: out.
+- `SMALLINT`: set 2 `stations.zone`.
+- `MEDIUMINT`: out.
+- `INT`: all schemas and set 5 rep 02.
+- `BIGINT`: set 4 movie and audit IDs.
+- Tamanho, faixa e consumo de espaço: set 4 large-table type choices; MySQL-specific range chart is out.
+- Inteiros signed e `UNSIGNED`: out; Postgres has no MySQL `UNSIGNED` syntax.
+- `AUTO_INCREMENT`: out; Postgres identity is covered.
+- Tipos textuais e binários: Postgres `text` in all schemas; MySQL-specific family is out.
+- `CHAR`: out.
+- `VARCHAR`: out as a named MySQL sizing rep; Postgres text is sufficient here.
+- `TINYTEXT`, `TEXT`, `MEDIUMTEXT` e `LONGTEXT`: `TEXT` appears in seeds, the MySQL family comparison is out.
+- Dimensionamento de strings: set 5 app input and text columns; exact MySQL limits are out.
+- `BLOB`: out.
+- `ENUM`: set 2 `card_status`.
+- `SET`: out; MySQL-only multi-value type.
+- Valores únicos versus múltiplos valores permitidos: enum/card status and `book_authors` many-to-many.
+- Tipos temporais: set 2 and set 5 schemas.
+- `DATE`: set 3 and set 4 schemas.
+- `TIME`: out; no time-only trap.
+- `DATETIME`: out as MySQL spelling.
+- `TIMESTAMP`: `timestamptz` in sets 2, 3 and 5.
+- `YEAR`: release year integers in sets 1 and 4; MySQL `YEAR` type is out.
+- Precisão fracionária: set 2 `numeric(10,2)` and timestamps.
+- Valores padrão de data e hora: set 2 audit trigger and set 5 rides.
+- Números reais e dinheiro: set 2 and set 5 numeric balances/fares.
+- `FLOAT`: out; the trap compares numeric with floating point.
+- `DOUBLE PRECISION`: out as a separate MySQL type exercise.
+- Imprecisão de ponto flutuante: set 5 rep 02.
+- `DECIMAL(precisão, escala)`: Postgres `numeric(10,2)` is the equivalent in set 2 and set 5.
+- Uso de precisão fixa para valores monetários: set 2 reps 01-02 and set 5 rep 02.
+- Constraints e tipagem no MySQL: Postgres equivalents in set 2 reps 01-02; MySQL behavior out.
+- `PRIMARY KEY` e `FOREIGN KEY`: all schemas and set 2 rep 05.
+- `NOT NULL`, `UNIQUE`, `CHECK` e `DEFAULT`: set 2 schema and reps 01-02.
+- Tipagem mais rígida que a do SQLite: set 2 rep 02 catalog output.
+- Índices associados às chaves: set 4 rep 04 and schema primary keys.
+- Colunas geradas automaticamente: identity columns in set 2 and set 5 rep 02.
+- Alteração de tabelas: set 2 rep 01.
+- `ALTER TABLE`: set 2 rep 01.
+- `MODIFY`: out; MySQL-only spelling.
+- Alteração de tipos e tamanhos: set 2 catalog/type doorway; no risky production migration.
+- Expansão de `VARCHAR`: out; no VARCHAR fixture.
+- Inclusão de novos valores em um `ENUM`: set 2 enum doorway; no separate migration slot.
+- Stored procedures: out; the plan's writable trap is triggers and Python parameters, not MySQL delimiter syntax.
+- Automação de sequências SQL frequentes: set 2 trigger and set 5 scripts.
+- `CREATE PROCEDURE`: out.
+- `CALL`: out.
+- Blocos `BEGIN ... END`: set 2 trigger and set 4 transactions; MySQL procedure syntax out.
+- Mudança temporária de `DELIMITER`: out.
+- Procedimentos com e sem parâmetros: out.
+- Vários parâmetros e valores de saída: out.
+- Composição de múltiplas instruções: set 4 rep 07 and set 5 scripts.
+- Subconsultas dentro de procedimentos: out with procedures.
+- Condicionais `IF`, `ELSEIF` e `ELSE`: out; shell/SQL predicates carry the relevant trap.
+- Loops: set 5 replication poll and set 4 race shell, but MySQL procedure loops are out.
+- Implementação de operações como vender uma obra e registrar a transação: set 4 wallet/seat transactions; art-sale domain is out.
+- Introdução ao PostgreSQL: every compose, `psql` run, and set 5 reps 01-02.
+- Cliente `psql`: all manifests and README doorways.
+- Criação e conexão com bancos: compose environment and set 5 topology.
+- Comandos `\l`, `\c`, `\dt`, `\d` e `\q`: doorway only; the reps need catalog/results, not a command quiz.
+- Identificadores entre aspas duplas: SQL files use qualified names; no separate quoting trap.
+- `SMALLINT`, `INTEGER` e `BIGINT`: schemas and set 5 rep 02.
+- `SMALLSERIAL`, `SERIAL` e `BIGSERIAL`: out; identity is the current Postgres choice.
+- Tipos personalizados com `CREATE TYPE ... AS ENUM`: set 2 schema and rep 02.
+- `DATE`, `TIME`, `TIMESTAMP` e `INTERVAL`: date/timestamptz in sets 2-5 and interval in set 5 rep 02; time-only is out.
+- `NUMERIC`: set 2 and set 5 rep 02.
+- Tipo `MONEY`: set 5 rep 02 explicitly keeps numeric instead; `money` itself is out.
+- Função `NOW()`: set 2 audit default and set 5 rides.
+- Escala vertical e horizontal: set 5 README and reps 05-06.
+- Otimização e ampliação de um único servidor: set 4 reps 01-05.
+- Adição de novos servidores: set 5 compose.
+- Limites físicos da escala vertical: README doorway; no hardware project.
+- Distribuição de carga na escala horizontal: set 5 replica/shard reps.
+- Replicação: rep 05.
+- Cópias do banco em vários servidores: rep 05.
+- Single-leader: rep 05 primary/replica.
+- Multi-leader: out; no multi-writer fixture.
+- Leaderless: out; no leaderless fixture.
+- Líder, seguidores e read replicas: rep 05.
+- Escritas no líder e distribuição de leituras: rep 05.
+- Replicação síncrona e assíncrona: rep 05's lag prediction.
+- Confirmação do follower antes de responder ao cliente: synchronous behavior is doorway contrast in rep 05; async is the runnable fixture.
+- Latência versus garantia de redundância: rep 05's lag/availability statement.
+- Replicação sem espera: rep 05.
+- Risco de atraso ou perda antes da propagação: rep 05 statement.
+- Escolha conforme o domínio: doorway in set 5; no finance/health production deployment.
+- Sharding: rep 06.
+- Particionamento físico entre servidores: rep 06 two databases.
+- Divisão alfabética: rep 06 statement doorway; suffix rule is the runnable partition.
+- Divisão por faixas de chave primária: out as an alternative strategy; rep 06 uses even/odd to expose the hotspot.
+- Escolha da shard key: rep 06.
+- Hotspots: rep 06.
+- Balanceamento desigual: rep 06's 8/0 output.
+- Single point of failure: set 5 README; no failure simulation is needed after the hotspot.
+- Combinação entre sharding e replicação: set 5 compose contains both; combined failure path is doorway.
+- Usuários e controle de acesso: reps 01 and set 3 rep 06.
+- `CREATE USER`: `CREATE ROLE` equivalent in rep 01; MySQL spelling is out.
+- Autenticação por senha: compose roles and app connection.
+- Usuário administrativo versus usuários restritos: rep 01.
+- `GRANT`: rep 01.
+- `REVOKE`: rep 01 cleanup and set 3 rep 06.
+- Privilégios de `SELECT`, `INSERT`, `UPDATE`, `DELETE` e `CREATE`: SELECT is runnable in rep 01; other privilege names are doorway because one least-privilege trap is enough.
+- Permissões sobre bancos, tabelas e views: reps 01 and set 3 rep 06.
+- Concessão de acesso a uma view anonimizada sem expor a tabela original: rep 01.
+- Princípio do menor privilégio: rep 01.
+- SQL injection: reps 03-04.
+- Entrada do usuário incorporada a consultas: reps 03-04.
+- Bypass de autenticação por condições sempre verdadeiras: rep 03.
+- Extração de dados com `UNION SELECT`: rep 03 statement doorway; login bypass is the runnable defect.
+- Riscos de interpolação e strings formatadas: reps 03-04.
+- Prepared statements: reps 02-04.
+- Separação entre código SQL e valores: reps 02-04.
+- Placeholders com `?`: psycopg `%s` and PostgreSQL `$1` equivalents in rep 02; MySQL `?` spelling is out.
+- Variáveis e parâmetros vinculados: reps 02-04.
+- `PREPARE`: rep 02.
+- `EXECUTE`: rep 02.
+- Escape e tratamento da entrada: reps 03-04 fix the bound-parameter path.
+- Proteção contra SQL injection: reps 03-04 corrected runs.
+
+## Estudos de caso utilizados
+
+- Livros indicados ao International Booker Prize: `sql-querying` seed and reps 01-09.
+- Autores, tradutores, editoras e avaliações: `sql-querying` seed and reps 03-08.
+- Migração de leões-marinhos para demonstrar joins: deliberately out; it is a lecture demonstration, while the Booker schema provides the same join traps.
+- Sistema de transporte MBTA e CharlieCards: `sql-designing-and-writing` seed and reps 01-09.
+- Coleção do Museum of Fine Arts de Boston: `sql-viewing` seed and reps 01-06.
+- Dados de filmes para índices e planos de consulta: `sql-optimizing` seed and reps 01-06.
+- Contas bancárias para transações e concorrência: `sql-optimizing` wallets and reps 07-08.
+- Aplicativo de caronas para privacidade e controle de acesso: `sql-scaling-and-security` rides and reps 01, 03-04.
+- Rede social para replicação e escalabilidade: deliberately out as a separate dataset; the primary/replica and shard fixtures exercise the same production topology without adding a sixth case study.

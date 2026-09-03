@@ -1,0 +1,1 @@
+-- Write the aggregated view and query here.

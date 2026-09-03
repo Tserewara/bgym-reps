@@ -1,0 +1,93 @@
+services:
+  primary:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: gym
+      POSTGRES_PASSWORD: gym
+      POSTGRES_DB: gym
+    command: ["postgres", "-c", "hba_file=/etc/postgresql/pg_hba.conf", "-c", "wal_level=replica", "-c", "max_wal_senders=10", "-c", "max_replication_slots=10", "-c", "listen_addresses=*"]
+    volumes:
+      - ./seed:/docker-entrypoint-initdb.d:ro
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    ports:
+      - "55437:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym -d gym && psql -U gym -d gym -Atqc \"SELECT count(*) = 4 FROM accounts\" | grep -qx t"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  replica:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: gym
+      POSTGRES_PASSWORD: gym
+      POSTGRES_DB: gym
+      PGDATA: /var/lib/postgresql/data/pgdata
+    entrypoint: ["/replica-entrypoint.sh"]
+    volumes:
+      - replica-data:/var/lib/postgresql/data
+      - ./replica-entrypoint.sh:/replica-entrypoint.sh:ro
+    depends_on:
+      primary:
+        condition: service_healthy
+    ports:
+      - "55438:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym -d gym && psql -U gym -d gym -Atqc \"SELECT pg_is_in_recovery()\" | grep -qx t"]
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /work
+    command: ["sleep", "infinity"]
+    volumes:
+      - .:/work
+    environment:
+      PGHOST: primary
+      PGPORT: "5432"
+      PGUSER: gym
+      PGPASSWORD: gym
+      PGDATABASE: gym
+    depends_on:
+      primary:
+        condition: service_healthy
+
+  shard-a:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: gym
+      POSTGRES_PASSWORD: gym
+      POSTGRES_DB: gym
+    volumes:
+      - ./shard-seed:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "55439:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym -d gym && psql -U gym -d gym -Atqc \"SELECT to_regclass('public.routed_events') IS NOT NULL\" | grep -qx t"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  shard-b:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: gym
+      POSTGRES_PASSWORD: gym
+      POSTGRES_DB: gym
+    volumes:
+      - ./shard-seed:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "55440:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym -d gym && psql -U gym -d gym -Atqc \"SELECT to_regclass('public.routed_events') IS NOT NULL\" | grep -qx t"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  replica-data:

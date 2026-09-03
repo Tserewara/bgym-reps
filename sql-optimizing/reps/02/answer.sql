@@ -1,0 +1,1 @@
+-- Write the index, ANALYZE, and EXPLAIN query here.

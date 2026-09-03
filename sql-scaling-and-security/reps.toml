@@ -1,0 +1,11 @@
+[rep_set]
+slug = "sql-scaling-and-security"
+
+[env]
+requires = ["docker"]
+up    = "docker compose up -d --wait"
+reset = "docker compose down -v && docker compose up -d --wait"
+down  = "docker compose down -v"
+
+[run]
+cmd = "docker compose exec -T primary psql -q -v ON_ERROR_STOP=1 -U gym -d gym -f - < reps/{n}/answer.sql"
