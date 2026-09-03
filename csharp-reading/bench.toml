@@ -1,0 +1,5 @@
+# Catalogue metadata the bench reads when publishing this set.
+stack = ["csharp"]
+level = "warmup"
+blurb = "Read and predict C# code behavior to build fluency with language traps."
+position = 6

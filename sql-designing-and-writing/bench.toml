@@ -1,0 +1,5 @@
+# Catalogue metadata the bench reads when publishing this set.
+stack = ["postgresql"]
+level = "intermediate"
+blurb = "Turn requirements into tables, constraints and keys, then insert, load, update and delete without leaving the data in a state you did not mean."
+position = 2
