@@ -1,0 +1,1 @@
+-- Write the role, grant, SET ROLE query, and cleanup here.
