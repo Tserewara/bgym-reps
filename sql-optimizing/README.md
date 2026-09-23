@@ -1,9 +1,9 @@
 # SQL · Optimizing
 
-`bgym start sql-optimizing` brings up a pinned Postgres 16 container and generates 500,000 deterministic movie rows in the seed. Nothing is installed on your machine. Write SQL in `reps/NN/answer.sql`; `bgym run NN` sends it to `psql`. Rep 8 has its own `run.sh` and a two-session fixture. `bgym reset` removes the volume and regenerates the data.
+`bgym start sql-optimizing` starts a pinned Postgres 16 container and generates 500,000 movie rows, the same rows every time. Nothing gets installed on your machine. Write SQL in `reps/NN/answer.sql`; `bgym run NN` sends it to `psql`. Rep 8 has its own `run.sh`, which opens two sessions at once. `bgym reset` drops the volume and generates the data again.
 
-You should have finished `sql-viewing` and be comfortable reading a query result. This set assumes you can look up plan and transaction syntax. The work is to read what the engine chose, what an index costs, and what two connections can do between one check and the next.
+Finish `sql-viewing` first. You should be comfortable reading a query result, and you'll look up plan and transaction syntax as you go. The reps are about reading what the engine chose, what an index costs, and what two connections can do between one check and the next.
 
-The movie table is large enough for a selective title lookup to change from a sequential scan to an index scan. The seed also contains two similarly named movies, two wallet balances and one seat, so a broad predicate, a half-transaction or a lost update is visible. The row generator is a script in `seed/02-data.sql`, not a checked-in data dump.
+The movie table is big enough that an exact title lookup goes from a sequential scan to an index scan once there's an index to use. The seed also has two movies with nearly the same title, two wallets and a single seat, which is enough to make an over-broad predicate, a half-finished transfer and a lost update show up. The rows come from a generator in `seed/02-data.sql`, not a data dump.
 
-Do `sql-viewing` before this set. Do `sql-scaling-and-security` after it.
+`sql-scaling-and-security` comes after this set.

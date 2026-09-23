@@ -1,11 +1,11 @@
-# C# · Reading Other People’s Code
+# C# · Reading Other People's Code
 
-`bgym start csharp-reading` brings up a .NET 8 SDK container; nothing is installed on your machine. Each rep is a program that already exists at `reps/NN/Program.cs`, and `bgym run NN` compiles it, runs it, and prints the output. Six of them you only read. The last one you edit.
+`bgym start csharp-reading` starts a .NET 8 SDK container, so nothing gets installed on your machine. Each rep is a program that already exists at `reps/NN/Program.cs`, and `bgym run NN` compiles it, runs it and prints the output. You only read the first six. You edit the last one.
 
-You need enough C# to read a class, a loop and a method call. Not to write one from scratch — that is not what this is for. What it is for is reading code you did not write and being able to say what it actually does, which is a different skill from writing it, and the more useful of the two once a machine produces the first draft.
+You need enough C# to read a class, a loop and a method call. You don't need to be able to write them from scratch, and this set won't ask you to. It trains reading code you didn't write and saying what it actually does. That's a different skill from writing it, and once a machine writes the first draft it's the one you use more.
 
-A rep goes like this. Read the program. Write down what you think it prints, on paper or in a comment, anywhere, as long as it is written before you run. Then run it. The rep is the gap between the two, and if you skip the writing down you will find you agreed with the output in hindsight every single time.
+Every rep works the same way. Read the program. Write down what you think it prints, on paper or in a comment, but write it before you run anything. Then run it and compare. Skip the writing and you'll find you agreed with the output in hindsight every time.
 
-Struct copy semantics, closure capture, deferred execution, synchronization contexts, deterministic disposal, and which `==` the compiler picks: none of it is explained here. Looking it up when you hit it is the part that builds the model. Being told up front is the part that does not.
+Struct copies, closure capture, deferred execution, synchronization contexts, deterministic disposal, and which `==` the compiler picks: none of it is explained here. Looking it up when a rep hits it is how the model gets built.
 
-The traps are the ones that reach production, and most of them are older than .NET 8 by a decade.
+These are traps that reach production, and most of them have been around for at least a decade before .NET 8.

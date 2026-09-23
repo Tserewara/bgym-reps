@@ -1,7 +1,11 @@
 # 07 · Compare title sets
 
-Print three result sets, each with a single `title` column: translated books intersected with books released in 2021 or later; the union of those two sets; and translated books released before 2021.
+Print three result sets, each a single `title` column:
 
-Use `INTERSECT`, `UNION` and `EXCEPT` as set operations. Do not make the three queries a join.
+1. translated books that were also released in 2021 or later;
+2. books that are translated, released in 2021 or later, or both;
+3. translated books released before 2021.
 
-Expected: the three result sets contain 4, 6 and 1 rows respectively. The last result is *At Night All Blood Is Black*. Set operations compare compatible result columns and remove duplicate rows by default.
+Use `INTERSECT`, `UNION` and `EXCEPT`, not joins.
+
+Expected: 4, 6 and 1 rows. The single row in the last set is *At Night All Blood Is Black*. Set operations need compatible columns on both sides, and they drop duplicate rows unless you say `ALL`.

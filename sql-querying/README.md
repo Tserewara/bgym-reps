@@ -1,9 +1,9 @@
 # SQL · Querying
 
-`bgym start sql-querying` brings up a pinned Postgres 16 container and seeds a small International Booker Prize longlist. Nothing is installed on your machine. Read `seed/` to see the tables and edge cases, then write each answer in `reps/NN/answer.sql`; `bgym run NN` pipes that file into `psql` and prints the rows. `bgym reset` removes the database volume and seeds it again.
+`bgym start sql-querying` starts a pinned Postgres 16 container and loads a small International Booker Prize longlist into it. Nothing gets installed on your machine. Write each answer in `reps/NN/answer.sql`; `bgym run NN` pipes that file into `psql` and prints the rows. `bgym reset` throws the database away and seeds it again.
 
-You need enough SQL to select rows and recognise a primary key and foreign key. The statements assume the course vocabulary around filters, joins, subqueries, set operations and aggregates. Find the syntax as each trap asks for it.
+You should already be able to select rows and tell a primary key from a foreign key. The reps use the usual vocabulary (filters, joins, subqueries, set operations, aggregates), and you look up the syntax when a rep needs it.
 
-The data has books, authors, translators, publishers and ratings. It is deliberately imperfect: translator IDs and ratings can be `NULL`, one author has no book, one book has no author, two publisher records share a name, and one publisher name has trailing whitespace. Those are data conditions, not hints about the query.
+The data covers books, their authors and translators, publishers and ratings. Read `seed/` before the first rep. The data is messy on purpose. Translator IDs and ratings can be `NULL`, one author has no book, one book has no author, two publisher records share a name, and one publisher name ends in a space. That's what the data is like; it doesn't tell you what to write.
 
-This is the first SQL set, so nothing comes before it. Finish here before `sql-designing-and-writing`.
+This is the first SQL set. `sql-designing-and-writing` comes after it.

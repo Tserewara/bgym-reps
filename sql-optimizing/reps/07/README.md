@@ -1,5 +1,5 @@
 # 07 · Make a transfer atomic
 
-Transfer 30.00 from Alice's wallet to Bob's wallet in one transaction, commit it, then attempt a second transfer of 200.00 and roll that one back after the balance check fails. Return balances after each decision.
+In one transaction, move 30.00 from Alice's wallet to Bob's and commit. Then start a second transfer of 200.00, check the balance, and roll it back when the check fails. Return both balances after each decision.
 
-Expected: after the committed transfer Alice is 70.00 and Bob is 80.00. After the rejected transfer those same balances remain. The database must not expose a half-transfer between the two updates.
+Expected: after the commit, Alice has 70.00 and Bob 80.00. After the rollback, the balances are still 70.00 and 80.00. At no point should anyone be able to see money that has left Alice's wallet and not yet reached Bob's.

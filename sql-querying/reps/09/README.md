@@ -1,7 +1,7 @@
 # 09 · Preserve both sides
 
-Return every publisher record beside its books, including the publisher with no books and the book with no publisher if one exists. Show publisher name and book title, with unmatched values as `NULL`.
+Return every publisher record next to its books, keeping a publisher with no books and a book with no publisher if there is one. Show the publisher name and the book title, with `NULL` where there's no match.
 
-`answer.sql` is assistant-written. Read it and predict how many rows it returns and what relationship its join is actually using. Run it, then replace the implicit join with the relationship in the schema.
+An assistant wrote `answer.sql`. Read it and predict how many rows it returns and which columns its join is really matching on. Run it, then replace the implicit join with the relationship the schema defines.
 
-Expected if it were right: 10 rows, including `Midnight Press` with a `NULL` book. The shipped query returns 7 rows because `NATURAL JOIN` matches the unrelated `id` columns instead of `publishers.id = books.publisher_id`.
+Expected once fixed: 10 rows, one of them `Midnight Press` with a `NULL` book. The shipped query returns 7, because `NATURAL JOIN` matches the two unrelated `id` columns instead of `publishers.id = books.publisher_id`.

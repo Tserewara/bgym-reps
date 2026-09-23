@@ -1,5 +1,5 @@
 # 02 · Bind typed values
 
-Prepare a statement that accepts an integer account ID and returns its numeric balance. Execute it for Alice, then show one `interval` value and the identity metadata for `accounts.id`.
+Prepare a statement that takes an integer account ID and returns that account's balance, and execute it for Alice. Then select the interval `'90 minutes'`, and look up the identity setting of `accounts.id` in `information_schema.columns`.
 
-Expected: Alice's balance is `100.00`, the interval is `01:30:00`, and `accounts.id` reports `ALWAYS` identity. Keep the values separate from the SQL text; the balance remains exact numeric data rather than floating point or `money`.
+Expected: Alice's balance is `100.00`, the interval prints as `01:30:00`, and `accounts.id` has `ALWAYS` identity generation. The account ID travels as a parameter, never inside the SQL text, and the balance comes back as exact `numeric`, not a float or `money`.

@@ -1,12 +1,10 @@
 # 01 · Where the copy happened
 
-`Program.cs` is already written. **Read it and predict all three lines before
-you run anything.** Write your prediction down — on paper, in a comment, wherever
-— because the point of this rep is the gap between it and the output.
+`Program.cs` is already written. Read it and predict all three lines before you run anything. Write the prediction down; the rep is the gap between what you wrote and what comes out.
 
 Then `bgym run 1`.
 
-**Expected:**
+Expected:
 
 ```
 a: 0
@@ -14,14 +12,8 @@ b: 0, 1
 c: 1
 ```
 
-If you predicted `a: 1`, you read `Bump()` as changing the thing in the list.
-It changed a copy that no longer exists — and the compiler let you write it
-without a word.
+If you predicted `a: 1`, you read `Bump()` as changing the counter in the list. It changed a copy, and that copy was thrown away right after. The compiler accepted it without a warning.
 
-Line `c` is the one worth sitting with: same struct, same method, different
-answer. Work out what is different about an array before you look it up, then
-look it up and see if you were right.
+Spend some time on line `c`: same struct, same method, different answer. Work out what an array does differently before you look it up, then look it up and check.
 
-Now the part that matters more than the answer: **the compiler accepted
-`counters[0].Bump()` silently.** What would you have to know to catch that in
-somebody else's pull request?
+Last question, and the one that matters most: `counters[0].Bump()` compiled silently. What would you need to know to catch it in somebody else's pull request?

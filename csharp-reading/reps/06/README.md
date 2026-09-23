@@ -2,7 +2,7 @@
 
 Predict all eight. Then `bgym run 6`.
 
-**Expected:**
+Expected:
 
 ```
 1: True
@@ -15,16 +15,10 @@ Predict all eight. Then `bgym run 6`.
 8: True
 ```
 
-Getting six of eight is normal. The interesting ones are **2**, **5** and
-**7**, and they are interesting for three different reasons.
+Six out of eight is a normal score. The interesting ones are 2, 5 and 7, each for a different reason.
 
-`2` is about something the compiler did to your program before it ran. `5` is
-about which `==` the compiler picked, and why the type of the *variable*
-decided that rather than the type of the *value*. `7` is the same rule as `5`
-wearing a different hat.
+`2` is about something the compiler did to your program before it ran. `5` is about which `==` the compiler picked, and why the declared type of the variable decided it and the type of the value didn't. `7` is the same rule as `5` in a different form.
 
-The rule you are looking for is not "reference types compare by reference".
-That rule is what makes `3` look impossible.
+If your rule is "reference types compare by reference", `3` should look impossible. Look for a better rule.
 
-Review question: you see `if (a == b)` where both are declared `object`. What do
-you now need to know before you can say whether that line is correct?
+Review question: you see `if (a == b)` where both are declared `object`. What do you need to know before you can say whether that line is correct?

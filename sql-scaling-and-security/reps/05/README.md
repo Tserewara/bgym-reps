@@ -1,5 +1,5 @@
 # 05 · Read from the replica
 
-Write one row to `replication_probe` on the primary in `answer.sql`. `run.sh` sends that file to the primary, checks the primary, and polls the streaming replica until the row arrives.
+In `answer.sql`, insert one row into `replication_probe` with the note `replica check`. `run.sh` sends the file to the primary, counts the rows there, and polls the streaming replica until the row shows up.
 
-Expected: the primary and replica each report 1 row with note `replica check`; the replica may briefly report 0 before catching up. Writes belong on the primary, and the read replica is allowed to lag.
+Expected: `primary=1 replica=1`, and the replica lists the row with the note `replica check`. The replica may show 0 for a moment before it catches up; reads from a replica can lag, and writes only go to the primary. Running it a second time fails on the primary key, so `bgym reset` before a retry.

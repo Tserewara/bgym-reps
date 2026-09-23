@@ -1,5 +1,5 @@
 # 05 · Delete through foreign keys
 
-Remove Bruno's swipes and then Bruno's card in one transaction. Return the number of cards and swipes left before rolling the transaction back.
+In one transaction, delete Bruno's swipes and then Bruno's card. Return how many cards and swipes are left, then roll back.
 
-Expected: 4 cards and 3 swipes remain inside the transaction. Deleting the card first should fail because the foreign key uses `ON DELETE RESTRICT`; deleting the dependent rows first is the decision you are testing.
+Expected: 4 cards and 3 swipes inside the transaction. The order is the point of the rep: if you delete the card first, the foreign key (`ON DELETE RESTRICT`) stops you with an error saying the card is still referenced from `swipes`.
