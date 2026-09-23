@@ -1,16 +1,16 @@
-# CS50 SQL coverage ledger
+# SQL coverage ledger
 
-This ledger maps every line of `sql/cs50-sql-summary.md` to a rep, a set README doorway, or an explicit exclusion. Rep numbers are local to their set.
+This ledger maps every topic in the SQL outline the sets were planned from (kept outside this repository) to a rep, a set README doorway, or an explicit exclusion. Rep numbers are local to their set.
 
 ## Introdução
 
-- Objetivos do curso: all five set doorways, with the read-and-judge objective in each README.
+- Objetivos: all five set doorways, with the read-and-judge objective in each README.
 - Bancos de dados e a linguagem SQL: `sql-querying` README and reps 01-09.
 - Operações de criar, consultar, atualizar e excluir dados: `sql-querying` reps 01, 04-09; `sql-designing-and-writing` reps 01, 04-09.
 - Modelagem de entidades e relacionamentos: `sql-querying` reps 05-09; `sql-designing-and-writing` README.
 - Views, índices e otimização: `sql-viewing` reps 01-06 and `sql-optimizing` reps 01-08.
 - Evolução de SQLite para MySQL e PostgreSQL: Postgres 16 is the chosen environment, stated in every README; SQLite/MySQL command-specific material is listed as out below.
-- Aplicações e conjuntos de dados usados durante o curso: each planned case study is named in its set README and seed.
+- Aplicações e conjuntos de dados de exemplo: each planned case study is named in its set README and seed.
 
 ## 1. Querying: consultando dados
 
@@ -161,7 +161,7 @@ This ledger maps every line of `sql/cs50-sql-summary.md` to a rep, a set README 
 - Normalização: set 2 README and rep 01's staging requirements.
 - Identificação de redundâncias: rep 01's normalized staging shape.
 - Divisão de uma tabela em várias entidades: set 2 schema.
-- Primeira, segunda e terceira formas normais como heurísticas: set 2 doorway; normalization is used, not lectured.
+- Primeira, segunda e terceira formas normais como heurísticas: set 2 doorway; normalization is used without being explained.
 - Manutenção de atributos na entidade correta: set 2 schema and rep 02.
 - Benefícios para consistência, manutenção e consultas: reps 03, 05, 06 and 08.
 - Criação de tabelas: rep 01.
@@ -558,7 +558,7 @@ This ledger maps every line of `sql/cs50-sql-summary.md` to a rep, a set README 
 
 - Livros indicados ao International Booker Prize: `sql-querying` seed and reps 01-09.
 - Autores, tradutores, editoras e avaliações: `sql-querying` seed and reps 03-08.
-- Migração de leões-marinhos para demonstrar joins: deliberately out; it is a lecture demonstration, while the Booker schema provides the same join traps.
+- Migração de leões-marinhos para demonstrar joins: deliberately out; it is a demonstration dataset, while the Booker schema provides the same join traps.
 - Sistema de transporte MBTA e CharlieCards: `sql-designing-and-writing` seed and reps 01-09.
 - Coleção do Museum of Fine Arts de Boston: `sql-viewing` seed and reps 01-06.
 - Dados de filmes para índices e planos de consulta: `sql-optimizing` seed and reps 01-06.
