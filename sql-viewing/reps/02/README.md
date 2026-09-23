@@ -1,5 +1,5 @@
 # 02 · Aggregate through a view
 
-Build an aggregated view on `current_collections` that returns each artist and their active collection count. Query it in descending count order. Keep the aggregation behind the view so the next query does not repeat the join.
+Build a view on top of `current_collections` that returns each artist and their number of active collections. Query it, highest count first, then by artist name. The join stays inside the views, so this query doesn't repeat it.
 
-Expected: 3 rows. Maya Lin has 2, Chen Wei has 1, and Amina Diallo has 1. The result must come from the view created in rep 1, not from the deleted row in the base table.
+Expected: 3 rows, Maya Lin with 2, then Amina Diallo and Chen Wei with 1 each. If Chen Wei shows 2, your view reads `collections` directly and counts the soft-deleted row.

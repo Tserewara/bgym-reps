@@ -1,9 +1,9 @@
 # SQL · Designing and writing
 
-`bgym start sql-designing-and-writing` brings up a pinned Postgres 16 container with a small MBTA CharlieCard schema. Nothing is installed on your machine. The tables and seed data live in `seed/`; write SQL in `reps/NN/answer.sql`, and `bgym run NN` sends it to `psql`. `bgym reset` recreates the volume and runs the seed again.
+`bgym start sql-designing-and-writing` starts a pinned Postgres 16 container with a small MBTA CharlieCard schema in it. Nothing gets installed on your machine. The tables and seed data are in `seed/`. Write your SQL in `reps/NN/answer.sql`; `bgym run NN` sends it to `psql`. `bgym reset` throws the database away and seeds it again.
 
-You should have finished `sql-querying` and be comfortable reading joins and aggregates. This set asks you to turn requirements into schema objects and to change data without leaving referential or audit damage behind.
+Finish `sql-querying` first; you should be able to read joins and aggregates without stopping. This set is about turning a requirement into schema objects, and about changing data without breaking a reference or losing an audit trail.
 
-The data has riders, cards, stations and swipes. It is deliberately imperfect: a station name has trailing whitespace, a card has no swipes, a station has no swipes, and a blocked card remains in the data. Balances use `numeric`, timestamps carry time zones, and card status is an enum. Several reps wrap their changes in a transaction and roll them back after inspecting the result.
+The data covers riders, cards, stations and swipes, plus an audit table of card status changes. It's messy on purpose. One station name ends in a space, two cards and two stations have no swipes, and a blocked card is still in the data. Balances are `numeric`, timestamps carry a time zone, and card status is an enum. Several reps make their change inside a transaction, look at the result and roll it back.
 
-Do `sql-querying` before this set. Do this set before `sql-viewing`.
+`sql-viewing` comes after this set.

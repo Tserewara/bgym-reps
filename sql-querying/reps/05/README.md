@@ -1,5 +1,5 @@
 # 05 · Find translated books
 
-Return the titles and years of books translated by an author whose country is Japan. Find the matching book IDs through a subquery, and order by year then title.
+Translators are rows in `authors`. Return the title and year of every book translated by someone whose country is Japan. Get the matching book IDs from a subquery. Order by year, newest first, then by title.
 
-Expected: 2 rows. *Tomb of Sand* (2022) comes before *Love in the Big City* (2021) when ordered by year descending. The subquery returns a set of IDs, not one value.
+Expected: 2 rows, *Tomb of Sand* (2022) and then *Love in the Big City* (2021). Two translators match, so the subquery returns two IDs, and `=` will fail where `IN` won't.

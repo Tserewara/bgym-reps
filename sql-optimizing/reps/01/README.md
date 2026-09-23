@@ -1,5 +1,5 @@
 # 01 · Read the first plan
 
-Find the exact movie titled `The Quiet Harbor` and put `EXPLAIN (ANALYZE, BUFFERS)` in front of the query. Do not create an index yet.
+Find the movie titled exactly `The Quiet Harbor`, with `EXPLAIN (ANALYZE, BUFFERS)` in front of the query. Don't create an index yet.
 
-Expected: one result row inside a plan containing `Seq Scan on movies`, with `actual rows=1`. The table has 500,000 rows, so record the execution time before changing the access path.
+Expected: a `Parallel Seq Scan on movies` under a `Gather` node (a plain `Seq Scan` if parallel workers are off). The `Gather` line reports `rows=1`; the scan node shows `rows=0 loops=3`, because the rows are averaged over the leader and two workers. Write down the execution time. You'll compare it in rep 2.

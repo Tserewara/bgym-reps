@@ -2,7 +2,7 @@
 
 Predict every line and its order. Then `bgym run 5`.
 
-**Expected:**
+Expected:
 
 ```
 open a
@@ -13,17 +13,10 @@ finally
 end
 ```
 
-`b` is never disposed. Not late, not at `GC.Collect()` — never.
+`b` is never disposed, not even after `GC.Collect()`.
 
-Two things to be sure about before you move on. First: why `dispose a` appears
-*before* `caught boom` rather than after. Second: why forcing a collection did
-not clean up `b`, when "the garbage collector will get it eventually" is what
-everybody says.
+Before you move on, be sure of two things. First, why `dispose a` comes before `caught boom` and not after it. Second, why forcing a collection didn't clean up `b`, when everybody says the garbage collector will get to it eventually.
 
-The second one has a precise answer and it is the reason `IDisposable` exists
-at all. If your explanation contains the word "eventually", you have not found
-it yet.
+The second one has a precise answer, and it's the reason `IDisposable` exists. If your explanation uses the word "eventually", keep looking.
 
-Review question: what is the smallest change that would have disposed `b`, and
-what is the smallest change that would have made the class safe even when
-somebody forgets?
+Review question: what's the smallest change that would have disposed `b`? And what's the smallest change that would make the class safe even when somebody forgets?

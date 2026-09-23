@@ -1,26 +1,18 @@
-# 04 · The deadlock that is not there
+# 04 · The deadlock that isn't there
 
-`FetchAsync().Result` — blocking on an async call. Every article about async in
-.NET says this deadlocks.
+`FetchAsync().Result` blocks on an async call. Every article about async in .NET says this deadlocks.
 
 Predict what happens. Then `bgym run 4`.
 
-**Expected:**
+Expected:
 
 ```
 before
 after: done
 ```
 
-It does not deadlock. It does not even hang. Your prediction was probably wrong
-in the safe direction, which is worse than being wrong in the dangerous one:
-you now believe a rule that is only true sometimes.
+No deadlock, and no hang either. If you predicted one, you were wrong in the safe direction, and that's the worse way to be wrong: you now hold a rule that's only true some of the time.
 
-Work out **why this one is fine**. The answer is not "because `.Result` is
-safe" — it is about what is not present in a console application that would be
-present somewhere else.
+Work out why this one is fine. It has to do with something a console application doesn't have and other applications do.
 
-Then find out where it *would* deadlock. There is a specific kind of
-application where this exact code hangs forever, and if you maintain anything
-written before 2019 you are likely to meet it. Name it, and name the one thing
-in the code above that is quietly preventing the problem even there.
+Then find where it would deadlock. There's a kind of application where this code would hang forever if it weren't for one detail it already contains. If you maintain anything written before 2019, you'll probably meet that kind of application. Name it, and name the detail.
