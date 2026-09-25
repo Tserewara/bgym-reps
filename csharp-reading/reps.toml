@@ -8,6 +8,8 @@ requires = ["docker"]
 up    = "docker compose up -d --wait"
 reset = "docker compose down -v && docker compose up -d --wait"
 down  = "docker compose down -v"
+# `bgym db`: a shell in the SDK container, to look around the projects.
+shell = "docker compose exec sdk bash"
 
 [run]
 # One project per rep, restored once by the compose healthcheck. `--nologo` so
