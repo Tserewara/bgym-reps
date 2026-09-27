@@ -1,2 +1,29 @@
 [rep_set]
 slug = "sql-viewing"
+
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). Only where the rep has something worth looking back at.
+[reps.1]
+closing_questions = [
+    "Inside a transaction, soft-delete collection 5 and query your view again. How many rows now, and what does that say the view stores?",
+]
+
+[reps.3]
+closing_questions = [
+    "Which condition was missing from the shipped view? Would reading `current_collections` instead have been a better fix, and why?",
+]
+
+[reps.4]
+closing_questions = [
+    "Your CTE and your temporary view returned the same rows. Which of the two could a later query in the same session reuse, and which one only lives inside its own statement?",
+]
+
+[reps.5]
+closing_questions = [
+    "Inside a transaction, try the same delete through `current_collections` with no trigger. What does Postgres say, and why can't it delete through that view on its own?",
+]
+
+[reps.6]
+closing_questions = [
+    "Which row did the base-table grant expose that the view hides? Look at the columns of `collections`: which one would a `SELECT *` have handed the role as well?",
+]
