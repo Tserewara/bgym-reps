@@ -8,7 +8,7 @@ class OrderStore
         [1] = 42.50m,
     };
 
-    // An assistant wrote this. It compiles, the tests pass, and it is wrong.
+    // An assistant wrote this. It compiles, the test for order 1 passes, and it is wrong.
     // Your job is in the README.
     public decimal TotalFor(int orderId)
     {

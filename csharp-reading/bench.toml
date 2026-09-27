@@ -1,5 +1,7 @@
 # Catalogue metadata the bench reads when publishing this set.
 stack = ["csharp"]
 level = "warmup"
-blurb = "Read and predict C# code behavior to build fluency with language traps."
+blurb = "Read C# somebody else wrote, run it, and explain why it prints what it prints: struct copies, closures, deferred queries, disposal and equality."
 position = 6
+# The template a learner generates their copy from (scripts/sync_starter.py).
+starter_repo = "Tserewara/reps-csharp-reading"
