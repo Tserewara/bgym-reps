@@ -1,2 +1,40 @@
 [rep_set]
 slug = "sql-optimizing"
+
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). Only where the rep has something worth looking back at.
+[reps.1]
+closing_questions = [
+    "How many buffers did the sequential scan read, and how many does rep 2's index scan read for the same movie?",
+]
+
+[reps.3]
+closing_questions = [
+    "Which predicate made the lookup match more than one title, and which row gave it away?",
+    "Run `EXPLAIN` on the shipped `LIKE`. Did rep 2's index serve it, and what does your database's collation have to do with that?",
+]
+
+[reps.4]
+closing_questions = [
+    "Explain `release_year = 1981 AND rating >= 4.0` without the genre. Does the planner still use your index, and how does its cost compare with the genre query's?",
+]
+
+[reps.5]
+closing_questions = [
+    "How much longer did the indexed insert take on your machine, and what did the index have to do for each of the 10,000 rows?",
+]
+
+[reps.6]
+closing_questions = [
+    "Which IDs were the two scratch rows, and what did you look at to find them instead of trusting a range?",
+]
+
+[reps.7]
+closing_questions = [
+    "Leave out your `SELECT` and run the 200.00 `UPDATE` anyway, then roll back. What stops it (`seed/01-schema.sql` has the answer if the error surprises you), and would you rather rely on that or on your check?",
+]
+
+[reps.8]
+closing_questions = [
+    "Time `run.sh` with the shipped file and with your fix. The fixed run takes about a second longer: where did the second session spend that second?",
+]

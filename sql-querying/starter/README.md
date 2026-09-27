@@ -47,3 +47,7 @@ If one of those is off, load the files again into an empty database.
 ## Starting over
 
 Drop the set's database from a session on the `postgres` database, create it again and load the two seed files. A rep that changes data is a rep you can redo from the same state.
+
+```sh
+psql postgresql://user:password@localhost:5433/postgres -c 'DROP DATABASE books' -c 'CREATE DATABASE books'
+```
