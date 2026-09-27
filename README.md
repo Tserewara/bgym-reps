@@ -7,11 +7,11 @@ You never work in this repository. Each set has a starter, a template you genera
 | Rep set | Stack | Reps | Starter |
 |---|---|---|---|
 | `sql-querying` | postgresql | 9 | [`reps-sql-querying`](https://github.com/Tserewara/reps-sql-querying) |
-| `sql-designing-and-writing` | postgresql | 9 | not yet |
-| `sql-viewing` | postgresql | 6 | not yet |
-| `sql-optimizing` | postgresql | 8 | not yet |
-| `sql-scaling-and-security` | postgresql | 6 | not yet |
-| `csharp-reading` | csharp | 7 | not yet |
+| `sql-designing-and-writing` | postgresql | 9 | [`reps-sql-designing-and-writing`](https://github.com/Tserewara/reps-sql-designing-and-writing) |
+| `sql-viewing` | postgresql | 6 | [`reps-sql-viewing`](https://github.com/Tserewara/reps-sql-viewing) |
+| `sql-optimizing` | postgresql | 8 | [`reps-sql-optimizing`](https://github.com/Tserewara/reps-sql-optimizing) |
+| `sql-scaling-and-security` | postgresql | 6 | [`reps-sql-scaling-and-security`](https://github.com/Tserewara/reps-sql-scaling-and-security) |
+| `csharp-reading` | csharp | 7 | [`reps-csharp-reading`](https://github.com/Tserewara/reps-csharp-reading) |
 
 ## For authors
 
