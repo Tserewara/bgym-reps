@@ -1,2 +1,44 @@
 [rep_set]
 slug = "sql-designing-and-writing"
+
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). Only where the rep has something worth looking back at.
+[reps.1]
+closing_questions = [
+    "Open a second `psql` session while the first is still connected. Can it see your staging table, and why?",
+]
+
+[reps.2]
+closing_questions = [
+    "What default did the catalog give `registered_at`, and is it evaluated when the table was created or at each insert?",
+]
+
+[reps.3]
+closing_questions = [
+    "Add `WHERE s.fare > 0` to your fixed query. How many rows come back, and which side of the join is that filter really on?",
+]
+
+[reps.4]
+closing_questions = [
+    "Run the rep a second time. Which IDs do the two new stations get now, and why not the ones you saw the first time?",
+]
+
+[reps.6]
+closing_questions = [
+    "Which condition widened the update, and what does an `OR` do to a filter that was meant to narrow it?",
+]
+
+[reps.7]
+closing_questions = [
+    "Would your pattern also catch a name that ends in a tab? Try it inside the transaction.",
+]
+
+[reps.8]
+closing_questions = [
+    "Run the same `UPDATE ... SET status = 'retired'` a second time before rolling back. How many rows are in `card_status_events` now, and which line of the trigger decides it?",
+]
+
+[reps.9]
+closing_questions = [
+    "How many rows did the soft delete add to `card_status_events`, and what does that leave an auditor unable to tell?",
+]
