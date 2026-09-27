@@ -4,17 +4,11 @@ import psycopg
 
 
 def search_rides(fragment):
-    # The input is data, but this query lets it become SQL syntax.
     sql = (
         "SELECT id, origin, destination FROM rides "
         f"WHERE origin LIKE '%{fragment}%' ORDER BY id"
     )
-    with psycopg.connect(
-        host=os.environ["PGHOST"],
-        user=os.environ["PGUSER"],
-        password=os.environ["PGPASSWORD"],
-        dbname=os.environ["PGDATABASE"],
-    ) as connection:
+    with psycopg.connect(os.environ["DATABASE_URL"]) as connection:
         with connection.cursor() as cursor:
             cursor.execute(sql)
             return cursor.fetchall()

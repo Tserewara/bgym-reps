@@ -1,15 +1,30 @@
 #!/bin/sh
+# Routes eight event keys to one of two shard databases, then counts each.
+# Give it both connections:
+#
+#   ./reps/06/shard.sh postgresql://user:password@localhost:5433/shard_a postgresql://user:password@localhost:5433/shard_b
+#
+# or, with Postgres in a container and no psql on your machine:
+#
+#   SHARD_A_PSQL="docker exec -i <container> psql -U <user> -d shard_a" \
+#   SHARD_B_PSQL="docker exec -i <container> psql -U <user> -d shard_b" ./reps/06/shard.sh
 set -eu
 
-compose="docker compose -f ../../compose.yaml"
-a="$compose exec -T shard-a psql -q -v ON_ERROR_STOP=1 -U gym -d gym"
-b="$compose exec -T shard-b psql -q -v ON_ERROR_STOP=1 -U gym -d gym"
+if [ -n "${SHARD_A_PSQL:-}" ] && [ -n "${SHARD_B_PSQL:-}" ]; then
+    a="$SHARD_A_PSQL -q -v ON_ERROR_STOP=1"
+    b="$SHARD_B_PSQL -q -v ON_ERROR_STOP=1"
+elif [ $# -eq 2 ]; then
+    a="psql $1 -q -v ON_ERROR_STOP=1"
+    b="psql $2 -q -v ON_ERROR_STOP=1"
+else
+    echo "usage: ./reps/06/shard.sh <shard-a> <shard-b>   (or set SHARD_A_PSQL and SHARD_B_PSQL)" >&2
+    exit 2
+fi
 
 $a -c 'TRUNCATE routed_events;'
 $b -c 'TRUNCATE routed_events;'
 
 route() {
-    # Defect: every key follows the same route.
     echo shard-a
 }
 

@@ -1,2 +1,34 @@
 [rep_set]
 slug = "sql-scaling-and-security"
+
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). Only where the rep has something worth looking back at.
+[reps.1]
+closing_questions = [
+    "Before you revoke anything, try `DROP ROLE app_reader`. Which objects does its `DETAIL` list, and what do you undo for each?",
+]
+
+[reps.2]
+closing_questions = [
+    "Run `EXECUTE` with `'1 OR 1=1'` as the account ID. What does Postgres answer, and why can't that text reach the `WHERE` clause?",
+]
+
+[reps.3]
+closing_questions = [
+    "Write out the `WHERE` clause the shipped script actually sent. Which part of the hostile password made it true for every row, and why would stripping quotes from the input not be enough?",
+]
+
+[reps.4]
+closing_questions = [
+    "In your fixed call, where do the `%` wildcards live: in the SQL text or in the bound value?",
+]
+
+[reps.5]
+closing_questions = [
+    "Try the same `INSERT` on the replica. What does Postgres say, and what does that tell you about where a write must go?",
+]
+
+[reps.6]
+closing_questions = [
+    "Change the loop to the keys `user-10` to `user-19` and run your version again. How does your rule split them, and how would it split keys that all end in 0?",
+]
