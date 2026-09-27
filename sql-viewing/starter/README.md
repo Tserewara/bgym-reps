@@ -49,3 +49,7 @@ If one of those is off, load the files again into an empty database.
 The views you create in reps 01 and 02 stay, and later reps build on them: rep 02 reads the view from rep 01, and so does rep 05. The judge reps and rep 05 roll their changes back.
 
 To start from the seed again, connect to the `postgres` database, drop the set's database, create it again and load the three seed files. The role lives in the server, not in the database, so `03-access.sql` then says `role "mfa_reader" already exists`: that line is harmless, and the grants after it still run.
+
+```sh
+psql postgresql://user:password@localhost:5433/postgres -c 'DROP DATABASE mfa' -c 'CREATE DATABASE mfa'
+```

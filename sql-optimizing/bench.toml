@@ -3,3 +3,5 @@ stack = ["postgresql"]
 level = "advanced"
 blurb = "Read a query plan and say why it is slow; add the index that changes it, and see what two concurrent sessions do to a balance."
 position = 4
+# The template a learner generates their copy from (scripts/sync_starter.py).
+starter_repo = "Tserewara/reps-sql-optimizing"
