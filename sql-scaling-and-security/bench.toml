@@ -3,3 +3,5 @@ stack = ["postgresql"]
 level = "advanced"
 blurb = "Read roles, injections, prepared statements, a replica that lags and a shard that runs hot, and say which one your system has."
 position = 5
+# The template a learner generates their copy from (scripts/sync_starter.py).
+starter_repo = "Tserewara/reps-sql-scaling-and-security"
