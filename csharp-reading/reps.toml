@@ -1,2 +1,44 @@
 [rep_set]
 slug = "csharp-reading"
+
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). They carry the "why" that the statements used to ask up front.
+[reps.1]
+closing_questions = [
+    "Why is `a` 0? What did `counters[0].Bump()` change, and what happened to it right after?",
+    "Line `c` uses the same struct and the same method. What does an array do differently from a `List<T>` here?",
+    "`counters[0].Bump()` compiled silently. What would you need to know to catch it in somebody else's pull request?",
+]
+
+[reps.2]
+closing_questions = [
+    "How many `i` variables do the two loops create, and how many `n`? Answer that and both lines follow.",
+    "`foreach` hasn't always behaved like this. When did it change, and what does that mean for code written before then?",
+]
+
+[reps.3]
+closing_questions = [
+    "Both surprises come from one fact about what `Where` returned. Put it in one sentence.",
+    "A method returns `IEnumerable<T>` from a `Where` over a database context, and the caller enumerates it twice. What do you tell them, and what should the method return instead?",
+]
+
+[reps.4]
+closing_questions = [
+    "Why is this one fine? Name both reasons: what a console application does not have, and what `FetchAsync` does after its `await`.",
+    "In which kind of application would this code hang forever if it weren't for one detail it already contains? Name the application and the detail.",
+]
+
+[reps.5]
+closing_questions = [
+    "Why does `dispose a` come before `caught boom`, and not after it?",
+    "Why didn't forcing a collection dispose `b`? If your answer uses the word \"eventually\", keep looking.",
+    "What's the smallest change that would have disposed `b`, and the smallest that makes the class safe even when somebody forgets?",
+]
+
+[reps.6]
+closing_questions = [
+    "Line 2: what did the compiler do to your program before it ran?",
+    "Lines 5 and 7: which `==` did the compiler pick, and why did the declared type decide it rather than the value's type?",
+    "If your rule is \"reference types compare by reference\", line 3 looks impossible. What's the better rule?",
+    "You see `if (a == b)` where both are declared `object`. What do you need to know before you can say whether that line is correct?",
+]
