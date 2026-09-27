@@ -1,13 +1,50 @@
 [rep_set]
 slug = "sql-querying"
 
-[env]
-requires = ["docker"]
-up    = "docker compose up -d --wait"
-reset = "docker compose down -v && docker compose up -d --wait"
-down  = "docker compose down -v"
-# `bgym db`: psql on the seeded database, to read the schema and the data.
-shell = "docker compose exec db psql -U gym -d gym"
+# Asked on the bench after the rep, never before it (backendgym DECISIONS §39,
+# amended). Only where the rep has something worth looking back at.
+[reps.1]
+closing_questions = [
+    "Two of your rows came out in 2021. What put *The Books of Jacob* before *The Promise*, and what would have decided their order without it?",
+]
 
-[run]
-cmd = "docker compose exec -T db psql -q -v ON_ERROR_STOP=1 -U gym -d gym -f - < reps/{n}/answer.sql"
+[reps.2]
+closing_questions = [
+    "Why did `translator_id = NULL` return no rows at all, instead of an error or every row?",
+]
+
+[reps.3]
+closing_questions = [
+    "Which two publisher IDs did the shipped query merge, and which word in it did that?",
+    "What does `DISTINCT` compare: the columns you select, or the rows they came from?",
+]
+
+[reps.4]
+closing_questions = [
+    "With `count(*)`, an unrated book shows 1. What was the one row that count found?",
+]
+
+[reps.5]
+closing_questions = [
+    "What did Postgres say when `=` met two translator IDs, and with which data would `=` have run without complaint?",
+]
+
+[reps.6]
+closing_questions = [
+    "Which side of the join lost Rowan Byrne, and what does a `LEFT JOIN` keep that an inner join drops?",
+]
+
+[reps.7]
+closing_questions = [
+    "How many rows would the second set have with `UNION ALL`, and which books would appear twice?",
+]
+
+[reps.8]
+closing_questions = [
+    "Georgi Gospodinov averages 4.43. Is that the average of his ratings or of his books' averages, and what does the other one give?",
+]
+
+[reps.9]
+closing_questions = [
+    "Which columns did `NATURAL JOIN` match on, and why did it still return rows?",
+]
