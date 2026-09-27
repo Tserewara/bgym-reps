@@ -3,3 +3,5 @@ stack = ["postgresql"]
 level = "intermediate"
 blurb = "Read and judge views: aggregated, layered, partitioned, and the ones that hand a role exactly what it may see and nothing more."
 position = 3
+# The template a learner generates their copy from (scripts/sync_starter.py).
+starter_repo = "Tserewara/reps-sql-viewing"
